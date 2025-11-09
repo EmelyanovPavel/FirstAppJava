@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FirstAppJava</string>
+    <string name="name">Name</string>
+    <string name="button">Button</string>
+    <string name="switch1">Switch</string>
+    <string name="checkbox">CheckBox</string>
+</resources>
