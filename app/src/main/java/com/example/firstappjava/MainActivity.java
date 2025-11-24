@@ -1,25 +1,51 @@
 package com.example.firstappjava;
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    @SuppressLint("MissingInflatedId")
+
+
+    private EditText etInput;
+    private Switch switchOption;
+    private CheckBox cbAgree;
+    private Button btnSubmit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        // Инициализация виджетов
+        etInput = findViewById(R.id.etInput);
+        switchOption = findViewById(R.id.switchOption);
+        cbAgree = findViewById(R.id.cbAgree);
+        btnSubmit = findViewById(R.id.btnSubmit);
+
+
+        // Обработчик кнопки
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = etInput.getText().toString();
+                boolean isSwitchOn = switchOption.isChecked();
+                boolean isAgreed = cbAgree.isChecked();
+
+                // Формируем сообщение
+                StringBuilder message = new StringBuilder();
+                message.append("Введено: ").append(text).append("\n");
+                message.append("Опция: ").append(isSwitchOn ? "Включена" : "Выключена").append("\n");
+                message.append("Согласие: ").append(isAgreed ? "Да" : "Нет");
+
+                // Выводим результат (вместо Toast можно использовать другие варианты)
+                Toast.makeText(MainActivity.this, message.toString(), Toast.LENGTH_LONG).show();
+            }
         });
     }
 }
